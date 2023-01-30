@@ -5,6 +5,7 @@ spring:
   application:
     name: demo
 
+
   datasource:
     url: jdbc:mysql://paperdb.cyikbwlysj6o.ap-northeast-2.rds.amazonaws.com:3306/Paper_DB?autoReconnect=true&ServerTimezone=UTC # 변경해주세요
     username: admin # 변경해주세요

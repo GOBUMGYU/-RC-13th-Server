@@ -12,6 +12,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigInteger;
 import java.util.Date;
 
 import static com.example.demo.config.BaseResponseStatus.*;
@@ -21,14 +22,14 @@ public class JwtService {
 
     /*
     JWT 생성
-    @param userIdx
+    @param userId
     @return String
      */
-    public String createJwt(int userIdx){
+    public String createJwt(BigInteger userId){
         Date now = new Date();
         return Jwts.builder()
                 .setHeaderParam("type","jwt")
-                .claim("userIdx",userIdx)
+                .claim("userId",userId)
                 .setIssuedAt(now)
                 .setExpiration(new Date(System.currentTimeMillis()+1*(1000*60*60*24*365)))
                 .signWith(SignatureAlgorithm.HS256, Secret.JWT_SECRET_KEY)
@@ -45,11 +46,11 @@ public class JwtService {
     }
 
     /*
-    JWT에서 userIdx 추출
-    @return int
+    JWT에서 userId 추출
+    @return BigInteger
     @throws BaseException
      */
-    public int getUserIdx() throws BaseException{
+    public BigInteger getUserId() throws BaseException{
         //1. JWT 추출
         String accessToken = getJwt();
         if(accessToken == null || accessToken.length() == 0){
@@ -66,8 +67,8 @@ public class JwtService {
             throw new BaseException(INVALID_JWT);
         }
 
-        // 3. userIdx 추출
-        return claims.getBody().get("userIdx",Integer.class);
+        // 3. userId 추출
+        return claims.getBody().get("userId",BigInteger.class);
     }
 
 }

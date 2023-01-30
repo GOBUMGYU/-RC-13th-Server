@@ -24,14 +24,27 @@ public enum BaseResponseStatus {
 
     // users
     USERS_EMPTY_USER_ID(false, 2010, "유저 아이디 값을 확인해주세요."),
+    USERS_EMPTY_USER_LOGIN_PASS(false, 2011, "비밀번호를 입력해주세요"),
+    USERS_EMPTY_USER_EMAIL(false, 2012, "이메일을 입력해주세요"),
+    USERS_ACTIVE_USER(false, 2013, "비활성 유저입니다."),
 
     // [POST] /users
     POST_USERS_EMPTY_EMAIL(false, 2015, "이메일을 입력해주세요."),
     POST_USERS_INVALID_EMAIL(false, 2016, "이메일 형식을 확인해주세요."),
     POST_USERS_EXISTS_EMAIL(false,2017,"중복된 이메일입니다."),
+    POST_USERS_INVALID_PASS(false, 2018, "비밀번호 형식을 확인해주세요"),
+    POST_USERS_INVALID_PHONE_NUMBER(false, 2019, "전화번호 형식을 확인해주세요"),
 
+    GET_MENU_ID_EMPTY(false, 2025, "메뉴가 존재하지 않습니다."),
 
+    // [POST] /kakao
+    POST_STORE_EMPTY_PHONENUMBER(false, 2020, "전화번호를 입력해주세요"),
+    NOT_ACCEPT_CONTRACT1(false, 2021, "00"),
+    NOT_ACCEPT_CONTRACT2(false, 2022, "00"),
+    NOT_ACCEPT_CONTRACT3(false, 2023, "00"),
 
+    STORE_INVALID_STORENAME(false, 2014, "유효하지 않은 가게 이름입니다."),
+    GET_STORE_EMPTY(false, 2015, "유효하지 않은 가게 입니다."),
     /**
      * 3000 : Response 오류
      */
