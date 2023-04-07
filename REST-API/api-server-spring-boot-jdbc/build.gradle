@@ -52,6 +52,11 @@ dependencies {
 
     implementation('org.springframework.boot:spring-boot-starter')
     implementation('org.springframework.boot:spring-boot-starter-web')
+
+    // thymeleaf, devtools
+    implementation ('org.springframework.boot:spring-boot-starter-thymeleaf')
+    implementation ('org.springframework.boot:spring-boot-devtools')
+
 }
 
 test {
