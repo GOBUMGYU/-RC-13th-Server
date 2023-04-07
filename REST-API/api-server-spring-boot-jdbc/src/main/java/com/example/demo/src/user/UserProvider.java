@@ -2,6 +2,7 @@ package com.example.demo.src.user;
 
 
 import com.example.demo.config.BaseException;
+import com.example.demo.config.BaseResponseStatus;
 import com.example.demo.src.user.model.*;
 import com.example.demo.utils.JwtService;
 import com.example.demo.utils.SHA256;
@@ -10,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import static com.example.demo.config.BaseResponseStatus.*;
@@ -29,17 +29,6 @@ public class UserProvider {
     public UserProvider(UserDao userDao, JwtService jwtService) {
         this.userDao = userDao;
         this.jwtService = jwtService;
-    }
-
-    //특정 유저 조회 API
-    public GetUserRes getUser(BigInteger userId) throws BaseException {
-        try {
-            GetUserRes getUserRes = userDao.getUser(userId);
-            return getUserRes;
-        } catch (Exception exception) {
-            logger.error("App - getUser Provider Error", exception);
-            throw new BaseException(DATABASE_ERROR);
-        }
     }
 
     public List<GetUserRes> getUsers() throws BaseException{
@@ -63,7 +52,17 @@ public class UserProvider {
         }
     }
 
-    //이메일 중복검사
+
+    public GetUserRes getUser(int userIdx) throws BaseException {
+        try {
+            GetUserRes getUserRes = userDao.getUser(userIdx);
+            return getUserRes;
+        } catch (Exception exception) {
+            logger.error("App - getUser Provider Error", exception);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
     public int checkEmail(String email) throws BaseException{
         try{
             return userDao.checkEmail(email);
@@ -73,28 +72,28 @@ public class UserProvider {
         }
     }
 
-    public PostLoginRes login(PostLoginReq postLoginReq) throws BaseException {
-
-        User user = userDao.getPwd(postLoginReq);
-        String pass;
+    public PostLoginRes logIn(PostLoginReq postLoginReq) throws BaseException {
         try {
-            try {
-                pass = new SHA256().encrypt(postLoginReq.getPass());
+            User user = userDao.getPwd(postLoginReq);
 
+            String encryptPwd;
+            try {
+                encryptPwd = new SHA256().encrypt(postLoginReq.getPassword());
             } catch (Exception exception) {
                 logger.error("App - logIn Provider Encrypt Error", exception);
                 throw new BaseException(PASSWORD_DECRYPTION_ERROR);
             }
-            if(user.getPass().equals(pass)){
-                BigInteger userId = userDao.getPwd(postLoginReq).getUserId();
-                String jwt = jwtService.createJwt(userId);
-                return new PostLoginRes(userId, jwt);
-            } else{
+
+            if(user.getPassword().equals(encryptPwd)){
+                int userIdx = user.getUserIdx();
+                String jwt = jwtService.createJwt(userIdx);
+                return new PostLoginRes(userIdx,jwt);
+            }
+            else{
                 throw new BaseException(FAILED_TO_LOGIN);
             }
-
         } catch (Exception exception) {
-            logger.error("App - login Provider Error", exception);
+            logger.error("App - logIn Provider Error", exception);
             throw new BaseException(DATABASE_ERROR);
         }
     }

@@ -1,19 +1,16 @@
 package com.example.demo.src.user.model;
 
-import lombok.*;
-
-import javax.persistence.Id;
-import java.math.BigInteger;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
-@NoArgsConstructor
 public class User {
-    @Id
-    private BigInteger userId;
-    private String name;
+    private int userIdx;
+    private String ID;
+    private String userName;
+    private String password;
     private String email;
-    private String pass;
 }

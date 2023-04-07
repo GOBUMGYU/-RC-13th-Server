@@ -1,7 +1,5 @@
 package com.example.demo.config;
 
-import com.example.demo.src.order.model.PostOrderDetailRes;
-import com.example.demo.src.order.model.PostOrderRes;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -34,12 +32,6 @@ public class BaseResponse<T> {
         this.isSuccess = status.isSuccess();
         this.message = status.getMessage();
         this.code = status.getCode();
-    }
-
-    public BaseResponse(PostOrderRes postOrderRes, PostOrderDetailRes postOrderDetailRes) {
-        this.isSuccess = SUCCESS.isSuccess();
-        this.message = SUCCESS.getMessage();
-        this.code = SUCCESS.getCode();
     }
 }
 
