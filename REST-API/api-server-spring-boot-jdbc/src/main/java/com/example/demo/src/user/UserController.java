@@ -1,5 +1,6 @@
 package com.example.demo.src.user;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.example.demo.config.BaseException;
@@ -9,32 +10,22 @@ import com.example.demo.utils.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 
 import static com.example.demo.config.BaseResponseStatus.*;
 import static com.example.demo.utils.ValidationRegex.isRegexEmail;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/app/users")
 public class UserController {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
     private final UserProvider userProvider;
-    @Autowired
     private final UserService userService;
-    @Autowired
     private final JwtService jwtService;
-
-
-
-
-    public UserController(UserProvider userProvider, UserService userService, JwtService jwtService){
-        this.userProvider = userProvider;
-        this.userService = userService;
-        this.jwtService = jwtService;
-    }
 
     /**
      * 회원 조회 API
@@ -46,32 +37,34 @@ public class UserController {
     //Query String
     @ResponseBody
     @GetMapping("") // (GET) 127.0.0.1:9000/app/users
-    public BaseResponse<List<GetUserRes>> getUsers(@RequestParam(required = false) String Email) {
+    public BaseResponse<List<GetUserRes>> getUsers(@RequestParam(required = false) String email) {
         try{
-            if(Email == null){
+            if(email == null){
                 List<GetUserRes> getUsersRes = userProvider.getUsers();
                 return new BaseResponse<>(getUsersRes);
             }
             // Get Users
-            List<GetUserRes> getUsersRes = userProvider.getUsersByEmail(Email);
+            List<GetUserRes> getUsersRes = userProvider.getUsersByEmail(email);
             return new BaseResponse<>(getUsersRes);
         } catch(BaseException exception){
             return new BaseResponse<>((exception.getStatus()));
         }
     }
 
+
     /**
      * 회원 1명 조회 API
      * [GET] /users/:userIdx
      * @return BaseResponse<GetUserRes>
      */
+
     // Path-variable
     @ResponseBody
-    @GetMapping("/{userIdx}") // (GET) 127.0.0.1:9000/app/users/:userIdx
-    public BaseResponse<GetUserRes> getUser(@PathVariable("userIdx") int userIdx) {
+    @GetMapping("/{userId}") // (GET) 127.0.0.1:9000/app/users/:userId
+    public BaseResponse<GetUserRes> getUser(@PathVariable("userId") BigInteger userId) {
         // Get Users
         try{
-            GetUserRes getUserRes = userProvider.getUser(userIdx);
+            GetUserRes getUserRes = userProvider.getUser(userId);
             return new BaseResponse<>(getUserRes);
         } catch(BaseException exception){
             return new BaseResponse<>((exception.getStatus()));
@@ -79,11 +72,13 @@ public class UserController {
 
     }
 
-    /**
+
+/**
      * 회원가입 API
      * [POST] /users
      * @return BaseResponse<PostUserRes>
      */
+
     // Body
     @ResponseBody
     @PostMapping("")
@@ -103,11 +98,13 @@ public class UserController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
-    /**
+
+/**
      * 로그인 API
      * [POST] /users/logIn
      * @return BaseResponse<PostLoginRes>
-     */
+     *//*
+
     @ResponseBody
     @PostMapping("/logIn")
     public BaseResponse<PostLoginRes> logIn(@RequestBody PostLoginReq postLoginReq){
@@ -121,11 +118,13 @@ public class UserController {
         }
     }
 
-    /**
+    */
+/**
      * 유저정보변경 API
      * [PATCH] /users/:userIdx
      * @return BaseResponse<String>
-     */
+     *//*
+
     @ResponseBody
     @PatchMapping("/{userIdx}")
     public BaseResponse<String> modifyUserName(@PathVariable("userIdx") int userIdx, @RequestBody User user){
@@ -147,5 +146,6 @@ public class UserController {
         }
     }
 
+*/
 
 }

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import static com.example.demo.config.BaseResponseStatus.*;
@@ -42,6 +43,8 @@ public class UserProvider {
         }
     }
 
+
+
     public List<GetUserRes> getUsersByEmail(String email) throws BaseException {
         try {
             List<GetUserRes> getUsersRes = userDao.getUsersByEmail(email);
@@ -53,9 +56,9 @@ public class UserProvider {
     }
 
 
-    public GetUserRes getUser(int userIdx) throws BaseException {
+    public GetUserRes getUser(BigInteger userId) throws BaseException {
         try {
-            GetUserRes getUserRes = userDao.getUser(userIdx);
+            GetUserRes getUserRes = userDao.getUser(userId);
             return getUserRes;
         } catch (Exception exception) {
             logger.error("App - getUser Provider Error", exception);
@@ -71,7 +74,7 @@ public class UserProvider {
             throw new BaseException(DATABASE_ERROR);
         }
     }
-
+/*
     public PostLoginRes logIn(PostLoginReq postLoginReq) throws BaseException {
         try {
             User user = userDao.getPwd(postLoginReq);
@@ -97,4 +100,5 @@ public class UserProvider {
             throw new BaseException(DATABASE_ERROR);
         }
     }
+    */
 }

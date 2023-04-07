@@ -6,9 +6,9 @@ spring:
     name: demo
 
   datasource:
-    url: jdbc:mysql://jdbc:mysql://3.36.151.60:3306/Paperdb # 변경해주세요
+    url: jdbc:mysql://3.36.151.60:3306/Paperdb # 변경해주세요
     username: paper # 변경해주세요
-    password: ss93121614! # 변경해주세요
+    password: 1234 # 변경해주세요
     driver-class-name: com.mysql.cj.jdbc.Driver # mysql 8버전
     # driver-class-name: com.mysql.jdbc.Driver # mysql 5버전
   sql:

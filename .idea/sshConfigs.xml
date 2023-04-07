@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig connectionConfig="{&quot;serverAliveInterval&quot;:300}" host="3.36.151.60" id="c0491da0-f470-4e21-bf2b-d0ddb3335430" keyPath="C:\Users\USER\Downloads\rc13th-server (1).ppk" port="22" customName="rc13-th-server" nameFormat="CUSTOM" username="ubuntu" useOpenSSHConfig="true">
+        <option name="customName" value="rc13-th-server" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>
