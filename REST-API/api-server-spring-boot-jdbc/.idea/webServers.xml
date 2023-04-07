@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="359dd83b-ad37-4b21-ae5f-3dc5b5fef885" name="rc-13th-server" url="http://rc13th-server.shop">
+        <fileTransfer rootFolder="/var/www/RC-13th-Server" accessType="SFTP" host="3.36.151.60" port="22" sshConfigId="5cb1194a-9939-42b3-97c7-1ece1cd01c7a" sshConfig="ubuntu@3.36.151.60:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
